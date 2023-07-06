@@ -20,6 +20,15 @@ class mAnalisis extends CI_Model
 		$data['c5'] = $this->db->query("SELECT ROUND(datediff('2023-07-12', tgl_mulai)/30) as tgl, id_karyawan FROM `tbl_karyawan`")->result();
 		return $data;
 	}
+	public function bobot()
+	{
+		$data['bc1'] = $this->db->query("SELECT * FROM `tbl_kriteria` WHERE type='1'")->result();
+		$data['bc2'] = $this->db->query("SELECT * FROM `tbl_kriteria` WHERE type='2'")->result();
+		$data['bc3'] = $this->db->query("SELECT * FROM `tbl_kriteria` WHERE type='3'")->result();
+		$data['bc4'] = $this->db->query("SELECT * FROM `tbl_kriteria` WHERE type='4'")->result();
+		$data['bc5'] = $this->db->query("SELECT * FROM `tbl_kriteria` WHERE type='5'")->result();
+		return $data;
+	}
 }
 
 /* End of file mAnalisis.php */
