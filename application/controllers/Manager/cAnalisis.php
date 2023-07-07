@@ -247,9 +247,12 @@ class cAnalisis extends CI_Controller
 				$this->db->insert('tbl_penilaian', $data);
 			}
 		}
+		$data_select = array(
+			'penilaian' => $this->mAnalisis->select()
+		);
 		$this->load->view('Manager/Layout/head');
 		$this->load->view('Manager/Layout/aside');
-		$this->load->view('Manager/vAnalisis');
+		$this->load->view('Manager/vAnalisis', $data_select);
 		$this->load->view('Manager/Layout/footer');
 	}
 }

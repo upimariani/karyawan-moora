@@ -29,6 +29,16 @@ class mAnalisis extends CI_Model
 		$data['bc5'] = $this->db->query("SELECT * FROM `tbl_kriteria` WHERE type='5'")->result();
 		return $data;
 	}
+	public function select()
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_penilaian');
+		$this->db->join('tbl_karyawan', 'tbl_penilaian.id_karyawan = tbl_karyawan.id_karyawan', 'left');
+
+		$this->db->order_by('hasil', 'desc');
+
+		return $this->db->get()->result();
+	}
 }
 
 /* End of file mAnalisis.php */
