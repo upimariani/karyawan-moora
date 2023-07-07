@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jul 2023 pada 17.17
+-- Waktu pembuatan: 07 Jul 2023 pada 15.05
 -- Versi server: 10.4.6-MariaDB
 -- Versi PHP: 7.3.9
 
@@ -241,7 +241,8 @@ INSERT INTO `tbl_absensi` (`id_absensi`, `id_karyawan`, `tgl_absensi`, `stat_abs
 (198, 10, '2023-06-18', 1, '07:00:00'),
 (199, 10, '2023-06-19', 1, '07:00:00'),
 (200, 10, '2023-06-20', 1, '07:00:00'),
-(202, 2, '2023-07-05', 9, '21:01:02');
+(202, 2, '2023-07-05', 9, '21:01:02'),
+(203, 11, '2023-07-07', 1, '06:13:33');
 
 -- --------------------------------------------------------
 
@@ -274,7 +275,8 @@ INSERT INTO `tbl_karyawan` (`id_karyawan`, `nama_karyawan`, `jk_karyawan`, `alam
 (7, 'Dadan', 'Laki - Laki', 'Kuningan', '087665455129', 'Sales', 'Staff', '2019-03-18'),
 (8, 'Gilang', 'Laki - Laki', 'Kuningan', '087665612908', 'Sales', 'Staff', '2018-03-19'),
 (9, 'Hendi', 'Laki - Laki', 'Kuningan', '085677612232', 'Sales', 'Staff', '2019-03-20'),
-(10, 'Irawan', 'Laki - Laki', 'Kuningan', '087667612432', 'Sales', 'Staff', '2019-03-21');
+(10, 'Irawan', 'Laki - Laki', 'Kuningan', '087667612432', 'Sales', 'Staff', '2019-03-21'),
+(11, 'coba', 'Perempuan', 'Ciawigebang, Kuningan', '089876545676', 'Chef', 'Ketua divisi', '2020-10-07');
 
 -- --------------------------------------------------------
 
@@ -364,7 +366,8 @@ INSERT INTO `tbl_pengelolaan_alat` (`id_pengelolaan_alat`, `id_karyawan`, `nama_
 (6, 6, 'Gergaji', 1, '2020-03-17', 0),
 (7, 7, 'Penyiku', 2, '2020-03-18', 0),
 (8, 8, 'Tang', 1, '2020-03-19', 1),
-(9, 9, 'Excavator', 1, '2020-03-20', 0);
+(9, 9, 'Excavator', 1, '2020-03-20', 0),
+(11, 11, 'Mesin Bor A-998', 3, '2023-07-07', 0);
 
 -- --------------------------------------------------------
 
@@ -377,12 +380,30 @@ CREATE TABLE `tbl_penilaian` (
   `id_karyawan` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tgl_proses` varchar(15) NOT NULL,
-  `nilai_kehadiran` int(11) NOT NULL,
-  `nilai_keterlambatan` int(11) NOT NULL,
-  `nilai_pengelolaan` int(11) NOT NULL,
-  `nilai_masa_kerja` int(11) NOT NULL,
-  `hasil` int(11) NOT NULL
+  `nilai_kehadiran` varchar(5) NOT NULL,
+  `nilai_keterlambatan` varchar(5) NOT NULL,
+  `nilai_pelanggaran` varchar(5) NOT NULL,
+  `nilai_pengelolaan` varchar(5) NOT NULL,
+  `nilai_masa_kerja` varchar(5) NOT NULL,
+  `hasil` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_penilaian`
+--
+
+INSERT INTO `tbl_penilaian` (`id_penilaian`, `id_karyawan`, `id_user`, `tgl_proses`, `nilai_kehadiran`, `nilai_keterlambatan`, `nilai_pelanggaran`, `nilai_pengelolaan`, `nilai_masa_kerja`, `hasil`) VALUES
+(1, 1, 1, '07-07-2023', '0.137', '0.107', '0.063', '0.045', '0.029', '0.381'),
+(2, 2, 1, '07-07-2023', '0.092', '0.027', '0.063', '0.045', '0.029', '0.256'),
+(3, 3, 1, '07-07-2023', '0.092', '0.054', '0.063', '0.045', '0.029', '0.283'),
+(4, 4, 1, '07-07-2023', '0.092', '0.054', '0.063', '0.045', '0.029', '0.283'),
+(5, 5, 1, '07-07-2023', '0.092', '0.08', '0.047', '0.045', '0.029', '0.293'),
+(6, 6, 1, '07-07-2023', '0.046', '0.027', '0.063', '0.045', '0.029', '0.21'),
+(7, 7, 1, '07-07-2023', '0.092', '0.08', '0.063', '0.045', '0.029', '0.309'),
+(8, 8, 1, '07-07-2023', '0.092', '0.08', '0.063', '0.045', '0.039', '0.319'),
+(9, 9, 1, '07-07-2023', '0.092', '0.08', '0.047', '0.045', '0.029', '0.293'),
+(10, 10, 1, '07-07-2023', '0.092', '0.08', '0.063', '0.045', '0.029', '0.309'),
+(11, 11, 1, '07-07-2023', '0.046', '0.107', '0.063', '0.045', '0.029', '0.29');
 
 -- --------------------------------------------------------
 
@@ -463,13 +484,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_absensi`
 --
 ALTER TABLE `tbl_absensi`
-  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_karyawan`
 --
 ALTER TABLE `tbl_karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_kriteria`
@@ -487,13 +508,13 @@ ALTER TABLE `tbl_pelanggaran`
 -- AUTO_INCREMENT untuk tabel `tbl_pengelolaan_alat`
 --
 ALTER TABLE `tbl_pengelolaan_alat`
-  MODIFY `id_pengelolaan_alat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_pengelolaan_alat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_penilaian`
 --
 ALTER TABLE `tbl_penilaian`
-  MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`

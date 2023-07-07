@@ -41,6 +41,8 @@ class cAnalisis extends CI_Controller
 				$bc1[] = $bobot_bc1[2];
 			} else if ($datac1[$i] >= $sub_bc1[3] && $datac1[$i] <= 26) {
 				$bc1[] = $bobot_bc1[3];
+			} else {
+				$bc1[] = $bobot_bc1[0];
 			}
 			// echo '<br>';
 		}
@@ -53,6 +55,7 @@ class cAnalisis extends CI_Controller
 
 		//c2
 		foreach ($data['karyawan'] as $key => $value) {
+			$karyawan[] = $value->id_karyawan;
 			$disiplin = $this->db->query("SELECT COUNT(id_absensi) as telat, tbl_karyawan.id_karyawan FROM `tbl_absensi` JOIN tbl_karyawan ON tbl_karyawan.id_karyawan=tbl_absensi.id_karyawan WHERE stat_absensi='9' AND tbl_karyawan.id_karyawan='" . $value->id_karyawan . "'")->result();
 			foreach ($disiplin as $key => $z) {
 				$item[] = $z->telat;
@@ -188,11 +191,66 @@ class cAnalisis extends CI_Controller
 		$sqrtc4 = round(sqrt($normalisasi_c4), 3);
 		$sqrtc5 = round(sqrt($normalisasi_c5), 3);
 
+		//bobot kehadiran
+		for ($aa = 0; $aa < sizeof($bc1); $aa++) {
+			$x1[] = $bc1[$aa] / $sqrtc1;
+			//bobot = 30% = 0,30
+			$ax1[] = round($x1[$aa] * 0.30, 3);
+		}
+		//bobot kedisiplinan waktu
+		for ($ab = 0; $ab < sizeof($bc2); $ab++) {
+			$x2[] = $bc2[$ab] / $sqrtc2;
+			//bobot = 25% = 0,25
+			$ax2[] = round($x2[$ab] * 0.25, 3);
+		}
+		//bobot kepatuhan
+		for ($ac = 0; $ac < sizeof($bc3); $ac++) {
+			$x3[] = $bc3[$ac] / $sqrtc3;
+			//bobot = 20% = 0,20
+			$ax3[] = round($x3[$ac] * 0.20, 3);
+		}
+		//bobot pengelolaan alat
+		for ($ad = 0; $ad < sizeof($bc4); $ad++) {
+			$x4[] = $bc4[$ad] / $sqrtc4;
+			//bobot = 15% = 0,15
+			$ax4[] = round($x4[$ad] * 0.15, 3);
+		}
+		//masa kerja
+		for ($ae = 0; $ae < sizeof($bc5); $ae++) {
+			$x5[] = $bc5[$ae] / $sqrtc5;
+			//bobot = 10% = 0,10
+			$ax5[] = round($x5[$ae] * 0.10, 3);
+		}
 
-		// $this->load->view('Manager/Layout/head');
-		// $this->load->view('Manager/Layout/aside');
-		// $this->load->view('Manager/vAnalisis');
-		// $this->load->view('Manager/Layout/footer');
+		$cek_data = $this->db->query("SELECT * FROM `tbl_penilaian`")->result();
+		foreach ($cek_data as $key => $value) {
+			$karyawan_penilaian[] = $value->id_karyawan;
+		}
+
+		for ($za = 0; $za < sizeof($bc1); $za++) {
+			$a = $ax1[$za] + $ax2[$za] + $ax3[$za] + $ax4[$za] + $ax5[$za];
+			$data = array(
+				'id_karyawan' => $karyawan[$za],
+				'id_user' => '1',
+				'tgl_proses' => date('d-m-Y'),
+				'nilai_kehadiran' => $ax1[$za],
+				'nilai_keterlambatan' => $ax2[$za],
+				'nilai_pelanggaran' => $ax3[$za],
+				'nilai_pengelolaan' => $ax4[$za],
+				'nilai_masa_kerja' => $ax5[$za],
+				'hasil' => $a,
+			);
+			if ($karyawan_penilaian[$za] == $karyawan[$za]) {
+				$this->db->where('id_karyawan', $karyawan[$za]);
+				$this->db->update('tbl_penilaian', $data);
+			} else {
+				$this->db->insert('tbl_penilaian', $data);
+			}
+		}
+		$this->load->view('Manager/Layout/head');
+		$this->load->view('Manager/Layout/aside');
+		$this->load->view('Manager/vAnalisis');
+		$this->load->view('Manager/Layout/footer');
 	}
 }
 
