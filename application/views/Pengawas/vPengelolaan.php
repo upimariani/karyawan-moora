@@ -46,7 +46,7 @@
 										<th class="text-center">No</th>
 										<th class="text-center">Nama Karyawan</th>
 										<th class="text-center">Nama Alat</th>
-										<th class="text-center">Tanggal Pinjam</th>
+										<th class="text-center">Tanggal Pemberian</th>
 										<th class="text-center">Quantity</th>
 										<th class="text-center">Status Kelola</th>
 										<th class="text-center">Action</th>
@@ -95,7 +95,7 @@
 										<th class="text-center">No</th>
 										<th class="text-center">Nama Karyawan</th>
 										<th class="text-center">Nama Alat</th>
-										<th class="text-center">Tanggal Pinjam</th>
+										<th class="text-center">Tanggal Pemberian</th>
 										<th class="text-center">Quantity</th>
 										<th class="text-center">Status Kelola</th>
 										<th class="text-center">Action</th>

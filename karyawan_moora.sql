@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jul 2023 pada 15.54
--- Versi server: 10.4.6-MariaDB
--- Versi PHP: 7.3.9
+-- Generation Time: Jul 19, 2023 at 02:15 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_absensi`
+-- Table structure for table `tbl_absensi`
 --
 
 CREATE TABLE `tbl_absensi` (
@@ -37,7 +37,7 @@ CREATE TABLE `tbl_absensi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_absensi`
+-- Dumping data for table `tbl_absensi`
 --
 
 INSERT INTO `tbl_absensi` (`id_absensi`, `id_karyawan`, `tgl_absensi`, `stat_absensi`, `time`) VALUES
@@ -242,12 +242,13 @@ INSERT INTO `tbl_absensi` (`id_absensi`, `id_karyawan`, `tgl_absensi`, `stat_abs
 (199, 10, '2023-06-19', 1, '07:00:00'),
 (200, 10, '2023-06-20', 1, '07:00:00'),
 (202, 2, '2023-07-05', 9, '21:01:02'),
-(203, 11, '2023-07-07', 1, '06:13:33');
+(203, 11, '2023-07-07', 1, '06:13:33'),
+(204, 2, '2023-07-19', 9, '19:11:26');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_karyawan`
+-- Table structure for table `tbl_karyawan`
 --
 
 CREATE TABLE `tbl_karyawan` (
@@ -262,7 +263,7 @@ CREATE TABLE `tbl_karyawan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_karyawan`
+-- Dumping data for table `tbl_karyawan`
 --
 
 INSERT INTO `tbl_karyawan` (`id_karyawan`, `nama_karyawan`, `jk_karyawan`, `alamat_karyawan`, `no_hp_karyawan`, `divisi`, `jabatan`, `tgl_mulai`) VALUES
@@ -281,7 +282,7 @@ INSERT INTO `tbl_karyawan` (`id_karyawan`, `nama_karyawan`, `jk_karyawan`, `alam
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kriteria`
+-- Table structure for table `tbl_kriteria`
 --
 
 CREATE TABLE `tbl_kriteria` (
@@ -292,7 +293,7 @@ CREATE TABLE `tbl_kriteria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_kriteria`
+-- Dumping data for table `tbl_kriteria`
 --
 
 INSERT INTO `tbl_kriteria` (`id_kriteria`, `nama_kriteria`, `bobot`, `type`) VALUES
@@ -312,15 +313,15 @@ INSERT INTO `tbl_kriteria` (`id_kriteria`, `nama_kriteria`, `bobot`, `type`) VAL
 (14, '3', 3, 4),
 (15, '5', 2, 4),
 (16, '7', 1, 4),
-(17, '60', 4, 5),
-(18, '18', 3, 5),
-(19, '12', 2, 5),
-(20, '5', 1, 5);
+(17, '37', 4, 5),
+(18, '25', 3, 5),
+(19, '13', 2, 5),
+(20, '1', 1, 5);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pelanggaran`
+-- Table structure for table `tbl_pelanggaran`
 --
 
 CREATE TABLE `tbl_pelanggaran` (
@@ -331,7 +332,7 @@ CREATE TABLE `tbl_pelanggaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_pelanggaran`
+-- Dumping data for table `tbl_pelanggaran`
 --
 
 INSERT INTO `tbl_pelanggaran` (`id_pelanggaran`, `id_karyawan`, `alasan_pelanggaran`, `tgl_pelanggaran`) VALUES
@@ -341,7 +342,7 @@ INSERT INTO `tbl_pelanggaran` (`id_pelanggaran`, `id_karyawan`, `alasan_pelangga
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pengelolaan_alat`
+-- Table structure for table `tbl_pengelolaan_alat`
 --
 
 CREATE TABLE `tbl_pengelolaan_alat` (
@@ -354,7 +355,7 @@ CREATE TABLE `tbl_pengelolaan_alat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_pengelolaan_alat`
+-- Dumping data for table `tbl_pengelolaan_alat`
 --
 
 INSERT INTO `tbl_pengelolaan_alat` (`id_pengelolaan_alat`, `id_karyawan`, `nama_alat`, `qty`, `tgl_pinjam`, `stat_kelola`) VALUES
@@ -372,7 +373,7 @@ INSERT INTO `tbl_pengelolaan_alat` (`id_pengelolaan_alat`, `id_karyawan`, `nama_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_penilaian`
+-- Table structure for table `tbl_penilaian`
 --
 
 CREATE TABLE `tbl_penilaian` (
@@ -389,26 +390,26 @@ CREATE TABLE `tbl_penilaian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_penilaian`
+-- Dumping data for table `tbl_penilaian`
 --
 
 INSERT INTO `tbl_penilaian` (`id_penilaian`, `id_karyawan`, `id_user`, `tgl_proses`, `nilai_kehadiran`, `nilai_keterlambatan`, `nilai_pelanggaran`, `nilai_pengelolaan`, `nilai_masa_kerja`, `hasil`) VALUES
-(1, 1, 1, '07-07-2023', '0.137', '0.107', '0.063', '0.045', '0.029', '0.381'),
-(2, 2, 1, '07-07-2023', '0.092', '0.027', '0.063', '0.045', '0.029', '0.256'),
-(3, 3, 1, '07-07-2023', '0.092', '0.054', '0.063', '0.045', '0.029', '0.283'),
-(4, 4, 1, '07-07-2023', '0.092', '0.054', '0.063', '0.045', '0.029', '0.283'),
-(5, 5, 1, '07-07-2023', '0.092', '0.08', '0.047', '0.045', '0.029', '0.293'),
-(6, 6, 1, '07-07-2023', '0.046', '0.027', '0.063', '0.045', '0.029', '0.21'),
-(7, 7, 1, '07-07-2023', '0.092', '0.08', '0.063', '0.045', '0.029', '0.309'),
-(8, 8, 1, '07-07-2023', '0.092', '0.08', '0.063', '0.045', '0.039', '0.319'),
-(9, 9, 1, '07-07-2023', '0.092', '0.08', '0.047', '0.045', '0.029', '0.293'),
-(10, 10, 1, '07-07-2023', '0.092', '0.08', '0.063', '0.045', '0.029', '0.309'),
-(11, 11, 1, '07-07-2023', '0.046', '0.107', '0.063', '0.045', '0.029', '0.29');
+(1, 1, 1, '19-07-2023', '0.137', '0.107', '0.063', '0.045', '0.031', '0.383'),
+(2, 2, 1, '19-07-2023', '0.092', '0.027', '0.063', '0.045', '0.031', '0.258'),
+(3, 3, 1, '19-07-2023', '0.092', '0.054', '0.063', '0.045', '0.031', '0.285'),
+(4, 4, 1, '19-07-2023', '0.092', '0.054', '0.063', '0.045', '0.024', '0.278'),
+(5, 5, 1, '19-07-2023', '0.092', '0.08', '0.047', '0.045', '0.031', '0.295'),
+(6, 6, 1, '19-07-2023', '0.046', '0.027', '0.063', '0.045', '0.031', '0.212'),
+(7, 7, 1, '19-07-2023', '0.092', '0.08', '0.063', '0.045', '0.031', '0.311'),
+(8, 8, 1, '19-07-2023', '0.092', '0.08', '0.063', '0.045', '0.031', '0.311'),
+(9, 9, 1, '19-07-2023', '0.092', '0.08', '0.047', '0.045', '0.031', '0.295'),
+(10, 10, 1, '19-07-2023', '0.092', '0.08', '0.063', '0.045', '0.031', '0.311'),
+(11, 11, 1, '19-07-2023', '0.046', '0.107', '0.063', '0.045', '0.024', '0.285');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user`
+-- Table structure for table `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
@@ -423,7 +424,7 @@ CREATE TABLE `tbl_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_user`
+-- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id_user`, `nama_user`, `alamat_user`, `no_hp_user`, `jk_user`, `username`, `password`, `level_user`) VALUES
@@ -435,89 +436,89 @@ INSERT INTO `tbl_user` (`id_user`, `nama_user`, `alamat_user`, `no_hp_user`, `jk
 --
 
 --
--- Indeks untuk tabel `tbl_absensi`
+-- Indexes for table `tbl_absensi`
 --
 ALTER TABLE `tbl_absensi`
   ADD PRIMARY KEY (`id_absensi`);
 
 --
--- Indeks untuk tabel `tbl_karyawan`
+-- Indexes for table `tbl_karyawan`
 --
 ALTER TABLE `tbl_karyawan`
   ADD PRIMARY KEY (`id_karyawan`);
 
 --
--- Indeks untuk tabel `tbl_kriteria`
+-- Indexes for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
   ADD PRIMARY KEY (`id_kriteria`);
 
 --
--- Indeks untuk tabel `tbl_pelanggaran`
+-- Indexes for table `tbl_pelanggaran`
 --
 ALTER TABLE `tbl_pelanggaran`
   ADD PRIMARY KEY (`id_pelanggaran`);
 
 --
--- Indeks untuk tabel `tbl_pengelolaan_alat`
+-- Indexes for table `tbl_pengelolaan_alat`
 --
 ALTER TABLE `tbl_pengelolaan_alat`
   ADD PRIMARY KEY (`id_pengelolaan_alat`);
 
 --
--- Indeks untuk tabel `tbl_penilaian`
+-- Indexes for table `tbl_penilaian`
 --
 ALTER TABLE `tbl_penilaian`
   ADD PRIMARY KEY (`id_penilaian`);
 
 --
--- Indeks untuk tabel `tbl_user`
+-- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_absensi`
+-- AUTO_INCREMENT for table `tbl_absensi`
 --
 ALTER TABLE `tbl_absensi`
-  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_karyawan`
+-- AUTO_INCREMENT for table `tbl_karyawan`
 --
 ALTER TABLE `tbl_karyawan`
   MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_kriteria`
+-- AUTO_INCREMENT for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
   MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_pelanggaran`
+-- AUTO_INCREMENT for table `tbl_pelanggaran`
 --
 ALTER TABLE `tbl_pelanggaran`
   MODIFY `id_pelanggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_pengelolaan_alat`
+-- AUTO_INCREMENT for table `tbl_pengelolaan_alat`
 --
 ALTER TABLE `tbl_pengelolaan_alat`
   MODIFY `id_pengelolaan_alat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_penilaian`
+-- AUTO_INCREMENT for table `tbl_penilaian`
 --
 ALTER TABLE `tbl_penilaian`
   MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_user`
+-- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;

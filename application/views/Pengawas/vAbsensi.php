@@ -123,11 +123,15 @@
 
 								<div class="form-group">
 									<label for="exampleInputPassword1">Tanggal</label>
-									<input type="date" name="tgl" class="form-control" id="exampleInputPassword1" placeholder="Password">
+									<input type="date" name="tgl" value="<?= date('Y-m-d') ?>" class="form-control" id="exampleInputPassword1" placeholder="Password">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputPassword1">Waktu</label>
-									<input type="time" name="time" step="1" class="form-control" id="exampleInputPassword1" placeholder="Password">
+									<?php
+									date_default_timezone_set("Asia/Jakarta");
+									$time = date("H:i:s");
+									?>
+									<input type="text" name="time" value="<?= $time ?>" class="form-control" id="exampleInputPassword1" placeholder="Password" readonly>
 								</div>
 
 							</div>
