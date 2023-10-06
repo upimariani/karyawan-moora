@@ -5,6 +5,7 @@ class mAnalisis extends CI_Model
 {
 	public function variabel()
 	{
+		$date = date('Y-m-d');
 		//data karyawan \
 		$data['karyawan'] = $this->db->query("SELECT * FROM `tbl_karyawan`")->result();
 		//kehadiran approve
@@ -16,8 +17,8 @@ class mAnalisis extends CI_Model
 		$data['c3'] = $this->db->query("SELECT COUNT(id_pelanggaran) as jml, tbl_karyawan.id_karyawan FROM `tbl_pelanggaran` RIGHT JOIN tbl_karyawan ON tbl_pelanggaran.id_karyawan=tbl_karyawan.id_karyawan GROUP BY tbl_karyawan.id_karyawan")->result();
 		//pengelolaan alat
 		$data['c4'] = $this->db->query("SELECT SUM(stat_kelola) as jml, tbl_karyawan.id_karyawan FROM `tbl_pengelolaan_alat` RIGHT JOIN tbl_karyawan ON tbl_pengelolaan_alat.id_karyawan=tbl_karyawan.id_karyawan GROUP BY tbl_karyawan.id_karyawan")->result();
-		//masa kerja
-		$data['c5'] = $this->db->query("SELECT ROUND(datediff('2023-07-12', tgl_mulai)/30) as tgl, id_karyawan FROM `tbl_karyawan`")->result();
+		//masa kerja 
+		$data['c5'] = $this->db->query("SELECT ROUND(datediff('" . $date . "', tgl_mulai)/30) as tgl, id_karyawan FROM `tbl_karyawan`")->result();
 		return $data;
 	}
 	public function bobot()

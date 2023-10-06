@@ -48,7 +48,7 @@
 										<th class="text-center">Jenis Kelamin</th>
 										<th class="text-center">Alamat</th>
 										<th class="text-center">No Telepon</th>
-										<th class="text-center">Divisi</th>
+										<th class="text-center">Posisi</th>
 										<th class="text-center">Jabatan</th>
 										<th class="text-center">Tanggal Mulai Kerja</th>
 										<th class="text-center">Action</th>
@@ -86,7 +86,7 @@
 										<th class="text-center">Jenis Kelamin</th>
 										<th class="text-center">Alamat</th>
 										<th class="text-center">No Telepon</th>
-										<th class="text-center">Divisi</th>
+										<th class="text-center">Posisi</th>
 										<th class="text-center">Jabatan</th>
 										<th class="text-center">Tanggal Mulai Kerja</th>
 										<th class="text-center">Action</th>
@@ -139,7 +139,7 @@
 						<input type="text" name="alamat" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Alamat" required>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Divisi</label>
+						<label for="exampleInputEmail1">Posisi</label>
 						<input type="text" name="divisi" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Divisi Karyawan" required>
 					</div>
 					<div class="form-group">
@@ -201,7 +201,7 @@ foreach ($karyawan as $key => $value) {
 							<input type="text" name="alamat" value="<?= $value->alamat_karyawan ?>" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Alamat" required>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Divisi</label>
+							<label for="exampleInputEmail1">Posisi</label>
 							<input type="text" name="divisi" value="<?= $value->divisi ?>" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Divisi Karyawan" required>
 						</div>
 						<div class="form-group">

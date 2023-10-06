@@ -74,7 +74,7 @@
 
 						<div class="info-box-content">
 							<span class="info-box-text">Karyawan Terbaik</span>
-							<span class="info-box-number"><?= $dashboard['karyawan_terbaik']->terbaik ?> | <?= $dashboard['karyawan_terbaik']->nama_karyawan ?></span>
+							<span class="info-box-number"><?= $dashboard['karyawan_terbaik']->hasil ?> | <?= $dashboard['karyawan_terbaik']->nama_karyawan ?></span>
 						</div>
 						<!-- /.info-box-content -->
 					</div>
@@ -97,7 +97,7 @@
 					<div class="callout callout-success">
 						<h5>Selamat Karyawan Terbaik!</h5>
 
-						<p>Pada Karyawan atas nama <strong><?= $dashboard['karyawan_terbaik']->nama_karyawan ?></strong> Divisi. <strong><?= $dashboard['karyawan_terbaik']->divisi ?></strong> sebagai <strong><?= $dashboard['karyawan_terbaik']->jabatan ?></strong></p>
+						<p>Pada Karyawan atas nama <strong><?= $dashboard['karyawan_terbaik']->nama_karyawan ?></strong> Posisi. <strong><?= $dashboard['karyawan_terbaik']->hasil ?></strong> sebagai <strong><?= $dashboard['karyawan_terbaik']->jabatan ?></strong></p>
 					</div>
 					<!-- /.card -->
 				</div>

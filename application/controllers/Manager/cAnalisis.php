@@ -11,14 +11,10 @@ class cAnalisis extends CI_Controller
 	}
 	public function index()
 	{
-
-		echo "Bismillah";
-		echo '<br>';
-
 		$data = $this->mAnalisis->variabel();
 		$bc = $this->mAnalisis->bobot();
 
-		//c1
+		//c1-------------------------------------------------
 		foreach ($data['c1'] as $key => $value) {
 			// echo $value->id_karyawan;
 			// echo ' ' . $value->jml;
@@ -53,7 +49,7 @@ class cAnalisis extends CI_Controller
 
 
 
-		//c2
+		//c2-----------------------------------------------------------
 		foreach ($data['karyawan'] as $key => $value) {
 			$karyawan[] = $value->id_karyawan;
 			$disiplin = $this->db->query("SELECT COUNT(id_absensi) as telat, tbl_karyawan.id_karyawan FROM `tbl_absensi` JOIN tbl_karyawan ON tbl_karyawan.id_karyawan=tbl_absensi.id_karyawan WHERE stat_absensi='9' AND tbl_karyawan.id_karyawan='" . $value->id_karyawan . "'")->result();
@@ -63,11 +59,11 @@ class cAnalisis extends CI_Controller
 				$item2[] = $z->id_karyawan;
 			}
 		}
-		// for ($z = 0; $z < sizeof($item); $z++) {
-		// 	echo $item[$z];
-		// 	echo $item2[$z];
-		// 	echo '<br>';
-		// }
+		for ($z = 0; $z < sizeof($item); $z++) {
+			// echo $item[$z];
+			// echo $item2[$z];
+			// echo '<br>';
+		}
 		foreach ($bc['bc2'] as $key => $value) {
 			$sub_bc2[] = $value->nama_kriteria;
 			$bobot_bc2[] = $value->bobot;
@@ -88,7 +84,10 @@ class cAnalisis extends CI_Controller
 		for ($b = 0; $b < sizeof($bc2); $b++) {
 			$normalisasi_c2 += pow($bc2[$b], 2);
 		}
-		//c3
+
+
+
+		//c3--------------------------------------------
 		// echo '<br>';
 		// echo '<br>';
 		foreach ($data['c3'] as $key => $value) {
@@ -117,7 +116,9 @@ class cAnalisis extends CI_Controller
 		for ($c = 0; $c < sizeof($bc3); $c++) {
 			$normalisasi_c3 += pow($bc3[$c], 2);
 		}
-		//c4
+
+
+		//c4-------------------------------------------------------------
 		// echo '<br>';
 		// echo '<br>';
 		foreach ($data['c4'] as $key => $value) {
@@ -155,7 +156,9 @@ class cAnalisis extends CI_Controller
 		for ($d = 0; $d < sizeof($bc4); $d++) {
 			$normalisasi_c4 += pow($bc4[$d], 2);
 		}
-		//c5
+
+
+		//c5-------------------------------------------------
 		// echo '<br>';
 		// echo '<br>';
 		foreach ($data['c5'] as $key => $value) {
@@ -191,6 +194,17 @@ class cAnalisis extends CI_Controller
 		$sqrtc4 = round(sqrt($normalisasi_c4), 3);
 		$sqrtc5 = round(sqrt($normalisasi_c5), 3);
 
+		// echo $sqrtc1;
+		// echo $sqrtc2;
+		// echo $sqrtc3;
+		// echo $sqrtc4;
+		// echo $sqrtc5;
+
+
+		// for ($bc = 0; $bc < sizeof($bc1); $bc++) {
+		// 	echo $datac1[$bc];
+		// 	echo '<br>';
+		// }
 		//bobot kehadiran
 		for ($aa = 0; $aa < sizeof($bc1); $aa++) {
 			$x1[] = $bc1[$aa] / $sqrtc1;
@@ -227,8 +241,12 @@ class cAnalisis extends CI_Controller
 			$karyawan_penilaian[] = $value->id_karyawan;
 		}
 
+		$no = 1;
 		for ($za = 0; $za < sizeof($bc1); $za++) {
 			$a = $ax1[$za] + $ax2[$za] + $ax3[$za] + $ax4[$za] + $ax5[$za];
+			// echo $a;
+			// echo $no++;
+			// echo '<br>';
 			$data = array(
 				'id_karyawan' => $karyawan[$za],
 				'id_user' => '1',

@@ -2,7 +2,8 @@
 <aside class="main-sidebar sidebar-light-danger elevation-4">
 	<!-- Brand Logo -->
 	<a href="index3.html" class="brand-link">
-		<span class="brand-text font-weight-light">CV.Anugrah Putra Tunggal</span>
+		<img src="<?= base_url('asset/logo.jpg') ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+		<h5 class="brand-text font-weight-light">CV.Anugrah <br>Putra Tunggal</h5>
 	</a>
 
 	<!-- Sidebar -->
