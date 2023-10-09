@@ -11,10 +11,39 @@ class cAnalisis extends CI_Controller
 	}
 	public function index()
 	{
-		$data = $this->mAnalisis->variabel();
+		$data_select = array(
+			'periode' => $this->mAnalisis->periode_analisis()
+		);
+		$this->load->view('Manager/Layout/head');
+		$this->load->view('Manager/Layout/aside');
+		$this->load->view('Manager/vPeriode', $data_select);
+		$this->load->view('Manager/Layout/footer');
+	}
+	public function detail_periode($periode)
+	{
+		$data_select = array(
+			'penilaian' => $this->mAnalisis->select($periode)
+		);
+		$this->load->view('Manager/Layout/head');
+		$this->load->view('Manager/Layout/aside');
+		$this->load->view('Manager/vAnalisis', $data_select);
+		$this->load->view('Manager/Layout/footer');
+	}
+	public function hitung()
+	{
+		$periode = $this->input->post('periode');
+		if ($periode == '7') {
+			$tgl = '2023-07-30';
+		} else if ($periode == '8') {
+			$tgl = '2023-08-30';
+		} else {
+			$tgl = '2023-09-30';
+		}
+		$data = $this->mAnalisis->variabel($periode, $tgl);
 		$bc = $this->mAnalisis->bobot();
 
 		//c1-------------------------------------------------
+		// echo '---------------------------------c1';
 		foreach ($data['c1'] as $key => $value) {
 			// echo $value->id_karyawan;
 			// echo ' ' . $value->jml;
@@ -48,11 +77,12 @@ class cAnalisis extends CI_Controller
 		}
 
 
+		// echo '---------------------------------c2';
 
 		//c2-----------------------------------------------------------
 		foreach ($data['karyawan'] as $key => $value) {
 			$karyawan[] = $value->id_karyawan;
-			$disiplin = $this->db->query("SELECT COUNT(id_absensi) as telat, tbl_karyawan.id_karyawan FROM `tbl_absensi` JOIN tbl_karyawan ON tbl_karyawan.id_karyawan=tbl_absensi.id_karyawan WHERE stat_absensi='9' AND tbl_karyawan.id_karyawan='" . $value->id_karyawan . "'")->result();
+			$disiplin = $this->db->query("SELECT COUNT(id_absensi) as telat, tbl_karyawan.id_karyawan FROM `tbl_absensi` JOIN tbl_karyawan ON tbl_karyawan.id_karyawan=tbl_absensi.id_karyawan WHERE stat_absensi='9' AND tbl_karyawan.id_karyawan='" . $value->id_karyawan . "' AND MONTH(tgl_absensi)='" . $periode . "'")->result();
 			foreach ($disiplin as $key => $z) {
 				$item[] = $z->telat;
 				$datac2[] = $z->telat;
@@ -86,16 +116,20 @@ class cAnalisis extends CI_Controller
 		}
 
 
+		// echo '---------------------------------c3';
 
 		//c3--------------------------------------------
 		// echo '<br>';
 		// echo '<br>';
-		foreach ($data['c3'] as $key => $value) {
-			// echo $value->id_karyawan;
-			// echo ' ' . $value->jml;
-			$datac3[] = $value->jml;
+		foreach ($data['karyawan'] as $key => $value) {
+			$pelanggaran = $this->db->query("SELECT COUNT(id_pelanggaran) as jml, tbl_karyawan.id_karyawan FROM `tbl_pelanggaran` RIGHT JOIN tbl_karyawan ON tbl_pelanggaran.id_karyawan=tbl_karyawan.id_karyawan  WHERE MONTH(tgl_pelanggaran) ='" . $periode . "' AND tbl_karyawan.id_karyawan ='" . $value->id_karyawan . "'")->row();
+			$datac3[] = $pelanggaran->jml;
+
+			// echo $pelanggaran->id_karyawan;
+			// echo $pelanggaran->jml;
 			// echo '<br>';
 		}
+
 		foreach ($bc['bc3'] as $key => $value) {
 			$sub_bc3[] = $value->nama_kriteria;
 			$bobot_bc3[] = $value->bobot;
@@ -117,6 +151,9 @@ class cAnalisis extends CI_Controller
 			$normalisasi_c3 += pow($bc3[$c], 2);
 		}
 
+
+
+		// echo '---------------------------------c4';
 
 		//c4-------------------------------------------------------------
 		// echo '<br>';
@@ -156,6 +193,9 @@ class cAnalisis extends CI_Controller
 		for ($d = 0; $d < sizeof($bc4); $d++) {
 			$normalisasi_c4 += pow($bc4[$d], 2);
 		}
+
+
+		// echo '---------------------------------c5';
 
 
 		//c5-------------------------------------------------
@@ -236,10 +276,10 @@ class cAnalisis extends CI_Controller
 			$ax5[] = round($x5[$ae] * 0.10, 3);
 		}
 
-		$cek_data = $this->db->query("SELECT * FROM `tbl_penilaian`")->result();
-		foreach ($cek_data as $key => $value) {
-			$karyawan_penilaian[] = $value->id_karyawan;
-		}
+		// $cek_data = $this->db->query("SELECT * FROM `tbl_penilaian`")->result();
+		// foreach ($cek_data as $key => $value) {
+		// 	$karyawan_penilaian[] = $value->id_karyawan;
+		// }
 
 		$no = 1;
 		for ($za = 0; $za < sizeof($bc1); $za++) {
@@ -251,6 +291,7 @@ class cAnalisis extends CI_Controller
 				'id_karyawan' => $karyawan[$za],
 				'id_user' => '1',
 				'tgl_proses' => date('d-m-Y'),
+				'periode' => $periode,
 				'nilai_kehadiran' => $ax1[$za],
 				'nilai_keterlambatan' => $ax2[$za],
 				'nilai_pelanggaran' => $ax3[$za],
@@ -258,20 +299,21 @@ class cAnalisis extends CI_Controller
 				'nilai_masa_kerja' => $ax5[$za],
 				'hasil' => $a,
 			);
-			if ($karyawan_penilaian[$za] == $karyawan[$za]) {
-				$this->db->where('id_karyawan', $karyawan[$za]);
-				$this->db->update('tbl_penilaian', $data);
-			} else {
-				$this->db->insert('tbl_penilaian', $data);
-			}
+			// if ($karyawan_penilaian[$za] == $karyawan[$za]) {
+			// 	$this->db->where('id_karyawan', $karyawan[$za]);
+			// 	$this->db->update('tbl_penilaian', $data);
+			// } else {
+			$this->db->insert('tbl_penilaian', $data);
+			// }
 		}
-		$data_select = array(
-			'penilaian' => $this->mAnalisis->select()
-		);
-		$this->load->view('Manager/Layout/head');
-		$this->load->view('Manager/Layout/aside');
-		$this->load->view('Manager/vAnalisis', $data_select);
-		$this->load->view('Manager/Layout/footer');
+		redirect('Manager/cAnalisis');
+	}
+	public function hapus($id)
+	{
+		$this->db->where('periode', $id);
+		$this->db->delete('tbl_penilaian');
+		$this->session->set_flashdata('success', 'Data Analisis Berhasil Dihapus!');
+		redirect('Manager/cAnalisis');
 	}
 }
 

@@ -14,9 +14,12 @@
 					</ol>
 				</div>
 			</div>
+
 		</div><!-- /.container-fluid -->
+
 	</section>
 
+	<!-- /.modal -->
 	<!-- Main content -->
 	<section class="content">
 		<?php if ($this->session->userdata('success')) {
@@ -43,7 +46,7 @@
 									<tr>
 										<th class="text-center">No</th>
 										<th class="text-center">Nama Karyawan</th>
-										<th class="text-center">Tgl Proses</th>
+										<th class="text-center">Analisis Periode</th>
 										<th class="text-center">Nilai Kehadiran</th>
 										<th class="text-center">Nilai Keterlambatan</th>
 										<th class="text-center">Nilai Pelanggaran</th>
@@ -60,7 +63,13 @@
 										<tr>
 											<td><?= $no++ ?></td>
 											<td><?= $value->nama_karyawan ?></td>
-											<td><?= $value->tgl_proses ?></td>
+											<td><?php if ($value->periode == '7') {
+													echo 'Juli';
+												} else if ($value->periode == '8') {
+													echo 'Agustus';
+												} else {
+													echo 'September';
+												} ?></td>
 											<td><?= $value->nilai_kehadiran ?></td>
 											<td><?= $value->nilai_keterlambatan ?></td>
 											<td><?= $value->nilai_pelanggaran ?></td>

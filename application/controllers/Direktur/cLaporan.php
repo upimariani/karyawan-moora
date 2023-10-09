@@ -13,7 +13,18 @@ class cLaporan extends CI_Controller
 	public function index()
 	{
 		$data_select = array(
-			'penilaian' => $this->mAnalisis->select()
+			'periode' => $this->mAnalisis->periode_analisis()
+		);
+		$this->load->view('Direktur/Layout/head');
+		$this->load->view('Direktur/Layout/aside');
+		$this->load->view('Direktur/vPeriode', $data_select);
+		$this->load->view('Direktur/Layout/footer');
+	}
+	public function detail_periode($periode)
+	{
+		$data_select = array(
+			'penilaian' => $this->mAnalisis->select($periode),
+			'periode' => $periode
 		);
 		$this->load->view('Direktur/Layout/head');
 		$this->load->view('Direktur/Layout/aside');
@@ -22,8 +33,7 @@ class cLaporan extends CI_Controller
 	}
 
 
-
-	public function cetak()
+	public function cetak($periode)
 	{
 		// memanggil library FPDF
 		require('asset/fpdf/fpdf.php');
@@ -57,7 +67,7 @@ class cLaporan extends CI_Controller
 		$pdf->SetFont('Times', '', 10);
 		$no = 1;
 
-		$data = $this->mAnalisis->select();
+		$data = $this->mAnalisis->select($periode);
 		foreach ($data as $key => $value) {
 			$pdf->Cell(10, 6, $no++, 1, 0, 'C');
 			$pdf->Cell(50, 6, $value->nama_karyawan, 1, 0);

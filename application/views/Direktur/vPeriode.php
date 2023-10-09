@@ -5,7 +5,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Informasi Hasil Analisis Metode MOORA</h1>
+					<h1>Informasi Periode Hasil Analisis Metode MOORA</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -14,10 +14,12 @@
 					</ol>
 				</div>
 			</div>
-			<a href="<?= base_url('Direktur/cLaporan/cetak/' . $periode) ?>" class="btn btn-success">Cetak Laporan</a>
+
 		</div><!-- /.container-fluid -->
+
 	</section>
 
+	<!-- /.modal -->
 	<!-- Main content -->
 	<section class="content">
 		<?php if ($this->session->userdata('success')) {
@@ -31,7 +33,7 @@
 		} ?>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-12  ">
+				<div class="col-6  ">
 
 					<div class="card">
 						<div class="card-header">
@@ -43,37 +45,25 @@
 								<thead>
 									<tr>
 										<th class="text-center">No</th>
-										<th class="text-center">Nama Karyawan</th>
-										<th class="text-center">Periode Analisis</th>
-										<th class="text-center">Nilai Kehadiran</th>
-										<th class="text-center">Nilai Keterlambatan</th>
-										<th class="text-center">Nilai Pelanggaran</th>
-										<th class="text-center">Nilai Pengelolaan Alat</th>
-										<th class="text-center">Nilai Masa Kerja</th>
-										<th class="text-center">Hasil</th>
+										<th class="text-center">Periode / Bulan</th>
+										<th class="text-center">View Detail</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
 									$no = 1;
-									foreach ($penilaian as $key => $value) {
+									foreach ($periode as $key => $value) {
 									?>
 										<tr>
-											<td><?= $no++ ?></td>
-											<td><?= $value->nama_karyawan ?></td>
-											<td><?php if ($value->periode == '7') {
-													echo 'Juli';
-												} else if ($value->periode == '8') {
-													echo 'Agustus';
-												} else {
-													echo 'September';
-												} ?></td>
-											<td><?= $value->nilai_kehadiran ?></td>
-											<td><?= $value->nilai_keterlambatan ?></td>
-											<td><?= $value->nilai_pelanggaran ?></td>
-											<td><?= $value->nilai_pengelolaan ?></td>
-											<td><?= $value->nilai_masa_kerja ?></td>
-											<td><?= $value->hasil ?></td>
+											<td class="text-center"><?= $no++ ?></td>
+											<td class=" text-center"><?php if ($value->periode == '7') {
+																			echo 'Juli';
+																		} else if ($value->periode == '8') {
+																			echo 'Agustus';
+																		} else {
+																			echo 'September';
+																		} ?></td>
+											<td class="text-center"><a href="<?= base_url('Direktur/cLaporan/detail_periode/' . $value->periode) ?>" class="btn btn-warning">View</a></td>
 										</tr>
 									<?php
 									}
@@ -83,14 +73,8 @@
 								<tfoot>
 									<tr>
 										<th class="text-center">No</th>
-										<th class="text-center">Nama Karyawan</th>
-										<th class="text-center">Tgl Proses</th>
-										<th class="text-center">Nilai Kehadiran</th>
-										<th class="text-center">Nilai Keterlambatan</th>
-										<th class="text-center">Nilai Pelanggaran</th>
-										<th class="text-center">Nilai Pengelolaan Alat</th>
-										<th class="text-center">Nilai Masa Kerja</th>
-										<th class="text-center">Hasil</th>
+										<th class="text-center">Periode / Bulan</th>
+										<th class="text-center">View Detail</th>
 									</tr>
 								</tfoot>
 							</table>
