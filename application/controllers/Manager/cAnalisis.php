@@ -234,56 +234,60 @@ class cAnalisis extends CI_Controller
 		$sqrtc4 = round(sqrt($normalisasi_c4), 3);
 		$sqrtc5 = round(sqrt($normalisasi_c5), 3);
 
-		// echo $sqrtc1;
-		// echo $sqrtc2;
-		// echo $sqrtc3;
-		// echo $sqrtc4;
-		// echo $sqrtc5;
+		// echo '<br>' . $sqrtc1;
+		// echo '<br>' . $sqrtc2;
+		// echo '<br>' . $sqrtc3;
+		// echo '<br>' . $sqrtc4;
+		// echo '<br>' . $sqrtc5;
 
 
 		// for ($bc = 0; $bc < sizeof($bc1); $bc++) {
-		// 	echo $datac1[$bc];
+		// 	echo $bc5[$bc];
 		// 	echo '<br>';
 		// }
 		//bobot kehadiran
 		for ($aa = 0; $aa < sizeof($bc1); $aa++) {
-			$x1[] = $bc1[$aa] / $sqrtc1;
+			$x1[] = round($bc1[$aa] / $sqrtc1, 3);
 			//bobot = 30% = 0,30
 			$ax1[] = round($x1[$aa] * 0.30, 3);
 		}
 		//bobot kedisiplinan waktu
 		for ($ab = 0; $ab < sizeof($bc2); $ab++) {
-			$x2[] = $bc2[$ab] / $sqrtc2;
+			$x2[] = round($bc2[$ab] / $sqrtc2, 3);
 			//bobot = 25% = 0,25
 			$ax2[] = round($x2[$ab] * 0.25, 3);
 		}
 		//bobot kepatuhan
 		for ($ac = 0; $ac < sizeof($bc3); $ac++) {
-			$x3[] = $bc3[$ac] / $sqrtc3;
+			$x3[] = round($bc3[$ac] / $sqrtc3, 3);
 			//bobot = 20% = 0,20
 			$ax3[] = round($x3[$ac] * 0.20, 3);
 		}
 		//bobot pengelolaan alat
 		for ($ad = 0; $ad < sizeof($bc4); $ad++) {
-			$x4[] = $bc4[$ad] / $sqrtc4;
+			$x4[] = round($bc4[$ad] / $sqrtc4, 3);
 			//bobot = 15% = 0,15
 			$ax4[] = round($x4[$ad] * 0.15, 3);
 		}
 		//masa kerja
 		for ($ae = 0; $ae < sizeof($bc5); $ae++) {
-			$x5[] = $bc5[$ae] / $sqrtc5;
+			$x5[] = round($bc5[$ae] / $sqrtc5, 3);
 			//bobot = 10% = 0,10
 			$ax5[] = round($x5[$ae] * 0.10, 3);
 		}
 
+		// for ($bc = 0; $bc < sizeof($bc1); $bc++) {
+		// 	echo $bc1[$bc] . '|' . $x1[$bc];
+		// 	echo '<br>';
+		// }
 		// $cek_data = $this->db->query("SELECT * FROM `tbl_penilaian`")->result();
 		// foreach ($cek_data as $key => $value) {
 		// 	$karyawan_penilaian[] = $value->id_karyawan;
 		// }
-
+		echo '<br>';
 		$no = 1;
 		for ($za = 0; $za < sizeof($bc1); $za++) {
-			$a = $ax1[$za] + $ax2[$za] + $ax3[$za] + $ax4[$za] + $ax5[$za];
+			$a = round(($ax1[$za] + $ax2[$za] + $ax3[$za] + $ax4[$za] + $ax5[$za]), 3);
 			// echo $a;
 			// echo $no++;
 			// echo '<br>';
@@ -299,10 +303,10 @@ class cAnalisis extends CI_Controller
 				'nilai_masa_kerja' => $ax5[$za],
 				'hasil' => $a,
 			);
-			// if ($karyawan_penilaian[$za] == $karyawan[$za]) {
-			// 	$this->db->where('id_karyawan', $karyawan[$za]);
-			// 	$this->db->update('tbl_penilaian', $data);
-			// } else {
+			// // if ($karyawan_penilaian[$za] == $karyawan[$za]) {
+			// // 	$this->db->where('id_karyawan', $karyawan[$za]);
+			// // 	$this->db->update('tbl_penilaian', $data);
+			// // } else {
 			$this->db->insert('tbl_penilaian', $data);
 			// }
 		}
