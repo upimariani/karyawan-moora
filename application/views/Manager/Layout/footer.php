@@ -61,6 +61,11 @@ AdminLTE App
 			"autoWidth": false,
 		});
 
+		$(".tabel").DataTable({
+			"responsive": true,
+			"autoWidth": false,
+		});
+
 		//Date range picker
 		$('#reservationdate').datetimepicker({
 			format: 'YYYY-MM-DD'

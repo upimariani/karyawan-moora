@@ -129,7 +129,13 @@
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Alasan Pelanggaran</label>
-						<textarea class="form-control" name="alasan" rows="5" required></textarea>
+						<select class="form-control" name="alasan">
+							<option value="">---Pilih Alasan---</option>
+							<option value="Tidak memakai seragam/rompi">Tidak memakai seragam/rompi</option>
+							<option value="Tidak memakai sarung tangan">Tidak memakai sarung tangan</option>
+							<option value="Tidak memakai sepatu">Tidak memakai sepatu</option>
+
+						</select>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -180,7 +186,19 @@ foreach ($pelanggaran as $key => $value) {
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Alasan Pelanggaran</label>
-							<textarea class="form-control" name="alasan" rows="5" required><?= $value->alasan_pelanggaran ?></textarea>
+							<select class="form-control" name="alasan">
+								<option value="">---Pilih Alasan---</option>
+								<option value="Tidak memakai seragam/rompi" <?php if ($value->alasan_pelanggaran == 'Tidak memakai seragam/rompi') {
+																				echo 'selected';
+																			} ?>>Tidak memakai seragam/rompi</option>
+								<option value="Tidak memakai sarung tangan" <?php if ($value->alasan_pelanggaran == 'Tidak memakai sarung tangan') {
+																				echo 'selected';
+																			} ?>>Tidak memakai sarung tangan</option>
+								<option value="Tidak memakai sepatu" <?php if ($value->alasan_pelanggaran == 'Tidak memakai sepatu') {
+																			echo 'selected';
+																		} ?>>Tidak memakai sepatu</option>
+
+							</select>
 						</div>
 					</div>
 					<div class="modal-footer justify-content-between">

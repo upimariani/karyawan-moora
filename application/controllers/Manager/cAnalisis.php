@@ -22,7 +22,8 @@ class cAnalisis extends CI_Controller
 	public function detail_periode($periode)
 	{
 		$data_select = array(
-			'penilaian' => $this->mAnalisis->select($periode)
+			'penilaian' => $this->mAnalisis->select($periode),
+			'periode' => $periode
 		);
 		$this->load->view('Manager/Layout/head');
 		$this->load->view('Manager/Layout/aside');
@@ -318,6 +319,16 @@ class cAnalisis extends CI_Controller
 		$this->db->delete('tbl_penilaian');
 		$this->session->set_flashdata('success', 'Data Analisis Berhasil Dihapus!');
 		redirect('Manager/cAnalisis');
+	}
+	public function detail_perhitungan($periode)
+	{
+		$data = array(
+			'periode' => $periode
+		);
+		$this->load->view('Manager/Layout/head');
+		$this->load->view('Manager/Layout/aside');
+		$this->load->view('Manager/vAnalisisPerhitungan', $data);
+		$this->load->view('Manager/Layout/footer');
 	}
 }
 

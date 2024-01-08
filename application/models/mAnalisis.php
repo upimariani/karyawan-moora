@@ -13,7 +13,7 @@ class mAnalisis extends CI_Model
 		//data karyawan \
 		$data['karyawan'] = $this->db->query("SELECT * FROM `tbl_karyawan`")->result();
 		//kehadiran approve
-		$data['c1'] = $this->db->query("SELECT COUNT(stat_absensi) as jml, id_karyawan FROM `tbl_absensi` WHERE stat_absensi = '1' AND MONTH(tgl_absensi)='" . $periode . "' GROUP BY id_karyawan")->result();
+		$data['c1'] = $this->db->query("SELECT COUNT(stat_absensi) as jml, tbl_karyawan.id_karyawan, nama_karyawan FROM `tbl_absensi` JOIN tbl_karyawan ON tbl_karyawan.id_karyawan=tbl_absensi.id_karyawan WHERE stat_absensi = '1' AND MONTH(tgl_absensi)='" . $periode . "' GROUP BY tbl_absensi.id_karyawan")->result();
 
 		//kedisiplinan waktu ada di dalam controller
 
