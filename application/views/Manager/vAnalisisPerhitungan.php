@@ -459,12 +459,10 @@
 									}
 									?>
 								</tbody>
-
 								<tfoot>
 									<tr>
 										<th class="text-center">No</th>
 										<th class="text-center">Nama Karyawan</th>
-
 										<th class="text-center">Nilai X1</th>
 										<th class="text-center">Nilai X2</th>
 										<th class="text-center">Nilai X3</th>
